@@ -1,65 +1,65 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const [name, setName] = useState("");
+  const router = useRouter();
+
+  const handleSubmit = () => {
+    if (!name.trim()) return;
+    localStorage.setItem("happychat_username", name.trim());
+    router.push("/chat");
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="min-h-screen flex flex-col items-center justify-center bg-linear-to-br from-[#FADF6F] via-[#F472B6] to-[#A8D5A2]">
+      <div className="flex flex-col items-center gap-8 w-full max-w-3xl px-6">
+        <div className="text-center pb-4">
+          <h1 className="text-5xl font-black text-black mb-4">
+            Welcome to HappyChat!
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-black/60 text-lg">
+            Before we start, what's your name?
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <div className="flex items-center gap-3 w-full">
+          <input
+            type="text"
+            placeholder="Enter your name..."
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+            className="
+              flex-1 bg-white/30 backdrop-blur-sm
+              rounded-full border-[3px] border-black
+              px-6 py-4 text-black placeholder:text-black/40
+              text-base outline-none focus:ring-0
+              shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
+              hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
+              hover:translate-x-0.5 hover:translate-y-0.5
+              transition-all duration-100
+            "
+          />
+          <button
+            onClick={handleSubmit}
+            className="
+              flex items-center justify-center
+              bg-[#4CAF72] border-[3px] border-black
+              rounded-full w-24 h-16 shrink-0
+              shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
+              hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
+              hover:translate-x-0.5 hover:translate-y-0.5
+              transition-all duration-100 cursor-pointer
+            "
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
