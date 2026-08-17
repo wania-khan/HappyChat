@@ -11,7 +11,6 @@ import TypingIndicator from "@/components/TypingIndicator";
 import ChatSidebar from "@/components/ChatSidebar";
 
 import Bot from "@/assets/bot.svg";
-import { error } from "console";
 
 interface Message {
   role: "user" | "assistant";
@@ -143,9 +142,8 @@ export default function ChatPage() {
       {/* Chat Area */}
       <div className="flex-1 flex flex-col h-screen">
         {/* Header */}
-        <header className="px-8 py-5 border-b-[3px] border-black bg-white/10 backdrop-blur-sm">
-          <h1 className="text-2xl font-black text-black">
-            Welcome to HappyChat, {userName}! 🌟
+        <header className="px-8 md:px-8 pl-20 md:pl-8 py-5 border-b-[3px] border-black bg-white/10 backdrop-blur-sm">          <h1 className="text-2xl font-black text-black">
+            Welcome to HappyChat, {userName}!
           </h1>
           <p className="text-black/80 text-sm mt-1">
             {activeChat ? activeChat.title : "What would you like to talk about?"}
@@ -153,7 +151,7 @@ export default function ChatPage() {
         </header>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto px-8 py-6 flex flex-col gap-4">
+        <div className="flex-1 overflow-y-auto px-4 md:px-8 py-6 flex flex-col gap-4">
           {!activeChat || activeChat.messages.length === 0 ? (
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
@@ -178,7 +176,7 @@ export default function ChatPage() {
         </div>
 
         {/* Input Area */}
-        <div className="px-8 py-5 border-t-[3px] border-black bg-white/10 backdrop-blur-sm">
+        <div className="px-4 md:px-8 py-4 md:py-5 border-t-[3px] border-black bg-white/10 backdrop-blur-sm">
           <div className="flex items-center gap-3">
             <InputBar
               value={input}
@@ -193,4 +191,3 @@ export default function ChatPage() {
     </div>
   );
 }
-
