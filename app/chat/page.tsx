@@ -11,6 +11,7 @@ import TypingIndicator from "@/components/TypingIndicator";
 import ChatSidebar from "@/components/ChatSidebar";
 
 import Bot from "@/assets/bot.svg";
+import { error } from "console";
 
 interface Message {
   role: "user" | "assistant";
@@ -95,8 +96,8 @@ export default function ChatPage() {
             : c
         )
       );
-    } catch {
-      console.error("Something went wrong");
+    } catch (error){
+      console.error("Something went wrong", error);
     } finally {
       setIsLoading(false);
     }
@@ -166,3 +167,4 @@ export default function ChatPage() {
     </div>
   );
 }
+
