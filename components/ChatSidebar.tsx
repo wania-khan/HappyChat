@@ -20,13 +20,12 @@ export default function ChatSidebar({
 }: ChatSidebarProps) {
   return (
     <aside className="
-      w-64 shrink-0 bg-white/20 backdrop-blur-sm
+      max-md:hidden w-64 shrink-0 bg-white/20 backdrop-blur-sm
       border-r-[3px] border-black
       flex flex-col h-full
     ">
       {/* Header */}
       <div className="p-4 border-b-[3px] border-black">
-        {/* <p className="text-xs font-bold text-black/50 uppercase tracking-widest mb-1">Hi</p> */}
         <p className="font-black text-black text-lg">{userName}'s Chats</p>
       </div>
 
@@ -49,7 +48,7 @@ export default function ChatSidebar({
       </div>
 
       {/* Chat List */}
-      <div className="flex-1 overflow-y-auto px-4 flex flex-col gap-2 h-full">
+      <div className="flex-1 moverflow-y-auto px-4 flex flex-col gap-2 h-full">
         {chats.length === 0 && (
           <p className="text-black/40 text-sm text-center mt-4">No chats yet</p>
         )}

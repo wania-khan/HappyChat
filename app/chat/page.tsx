@@ -87,7 +87,19 @@ export default function ChatPage() {
       });
 
       const data = await res.json();
-      const assistantMessage: Message = { role: "assistant", content: data.message };
+
+      if (!res.ok) {
+        throw new Error(data.error || "Something went wrong.");
+      }
+
+      if (!data.message) {
+        throw new Error("HappyChat returned an empty response.");
+      }
+
+      const assistantMessage: Message = {
+        role: "assistant",
+        content: data.message,
+      };
 
       setChats((prev) =>
         prev.map((c) =>
@@ -96,11 +108,25 @@ export default function ChatPage() {
             : c
         )
       );
-    } catch (error){
-      console.error("Something went wrong", error);
-    } finally {
-      setIsLoading(false);
-    }
+      } catch (error) {
+        console.error("Something went wrong:", error);
+
+        const errorMessage: Message = {
+          role: "assistant",
+          content:
+            "I'm having a little trouble connecting right now. Please try again in a moment 💛",
+        };
+
+        setChats((prev) =>
+          prev.map((c) =>
+            c.id === currentChat.id
+              ? { ...c, messages: [...c.messages, errorMessage] }
+              : c
+          )
+        );
+      } finally {
+        setIsLoading(false);
+      }
   };
 
   return (
